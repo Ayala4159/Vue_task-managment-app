@@ -1,7 +1,10 @@
 <template>
     <v-card elevated hover class="pa-5 mt-5 ml-10 mr-10">
         <v-card-title class="text-h5 mb-4">Tasks</v-card-title>
-
+        <template v-if="!hasTasks">
+            <v-empty-state icon="mdi-magnify"
+                text="Try adjusting your search terms or filters. Sometimes less specific terms or broader queries can help you find what you're looking for."
+                title="We couldn't find a match."></v-empty-state> </template>
         <div v-for="(tasks, categoryName) in tasksByCategory" :key="categoryName">
             <div class="d-flex align-center pa-3 bg-grey-lighten-4 rounded">
                 <v-icon class="mr-2">mdi-folder</v-icon>
@@ -32,6 +35,10 @@ const taskStore = useTaskStore();
 
 const groupBy = [{ key: 'category', order: 'asc' }]
 const tasksByCategory = computed(() => taskStore.tasksByCategory)
+const hasTasks = computed(() => {
+    const groups = tasksByCategory.value || {};
+    return Object.keys(groups).length > 0 && Object.values(groups).some(arr => arr && arr.length > 0);
+});
 
 const message = shallowRef(false)
 const timeout = ref(2000)

@@ -75,10 +75,13 @@ const isButtonEnabled = computed(() => {
     return taskName.value.trim() && taskCategory.value && !isDuplicateTask.value
 })
 
-watch(taskCategory, () => {
-    if (formRef.value) {
-        formRef.value.validate();
-    }
+watch(taskCategory, (val) => {
+  if (!formRef.value) return;
+  if (val === null || val === undefined || val === '') {
+    formRef.value.resetValidation();
+  } else {
+    formRef.value.validate();
+  }
 })
 
 function saveCategory() {

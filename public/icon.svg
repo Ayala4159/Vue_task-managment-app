@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+  <defs>
+    <linearGradient id="turquoiseGradient1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#005b5c" /> <stop offset="100%" stop-color="#008080" /> 
+    </linearGradient>
+    
+    <linearGradient id="turquoiseGradient2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#a4dbdf" /> <stop offset="100%" stop-color="#bce3e6" /> 
+    </linearGradient>
+  </defs>
+  
+  <rect width="24" height="24" rx="5" fill="#f0f0f0" />
+  
+  <rect x="5" y="13" width="3" height="7" rx="1" fill="url(#turquoiseGradient1)" />
+  
+  <rect x="10.5" y="8" width="3" height="12" rx="1" fill="url(#turquoiseGradient1)" />
+  
+  <rect x="16" y="4" width="3" height="16" rx="1" fill="url(#turquoiseGradient2)" />
+</svg>

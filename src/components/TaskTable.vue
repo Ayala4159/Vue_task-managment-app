@@ -11,12 +11,13 @@
             <v-data-table :headers="tableHeaders" :items="tasks" hide-default-header hide-default-footer>
                 <template v-slot:item="{ item }">
                     <TaskRow :item="item" @update-status="updateStatus" @delete-task="deleteTask" />
-                </template> 
+                </template>
             </v-data-table>
         </div>
 
         <v-snackbar :model-value="message === true" :timeout="timeout" :text=messageTxt :color=messageColor
             location="center top" @update:model-value="message = false"></v-snackbar>
+
     </v-card>
 </template>
 
@@ -24,11 +25,12 @@
 import { useTaskStore } from '@/stores/TaskStore.js'
 import { ref, computed, shallowRef } from 'vue'
 import TaskRow from './TaskRow.vue';
+
 const emit = defineEmits(['delete-task', 'update-status'])
 
 const taskStore = useTaskStore();
+
 const groupBy = [{ key: 'category', order: 'asc' }]
-const tasks = computed(() => taskStore.tasks)
 const tasksByCategory = computed(() => taskStore.tasksByCategory)
 
 const message = shallowRef(false)

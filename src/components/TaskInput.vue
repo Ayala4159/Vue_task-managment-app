@@ -1,8 +1,10 @@
 <template>
     <v-card elevated hover class="pa-5 mt-5 ml-10 mr-10">
         <v-card-title>Add new task</v-card-title>
+
         <v-form ref="formRef" class="w-100">
             <v-card-actions class="d-flex justify-center">
+
                 <v-text-field :rules="[rules.required, rules.uniqueTask]" label="Task name"
                     placeholder="Enter task name" variant="underlined" max-width="33%" v-model="taskName">
                 </v-text-field>
@@ -33,9 +35,11 @@
 <script setup>
 import { ref, computed, shallowRef, watch } from 'vue'
 import { useTaskStore } from '@/stores/TaskStore.js'
+
 const taskStore = useTaskStore();
 
 const emit = defineEmits(['category-added', 'task-added']);
+
 const message = shallowRef(false)
 const rules = {
     required: value => !!value || 'Field is required',
@@ -46,6 +50,7 @@ const rules = {
 }
 
 const tasks = computed(() => taskStore.tasks)
+
 const categories = computed(() => {
     const storeCategories = taskStore.categories || [];
     if (taskCategory.value && !storeCategories.includes(taskCategory.value)) {
@@ -57,6 +62,7 @@ const categories = computed(() => {
 const taskName = ref('')
 const taskCategory = ref()
 const newCategory = ref('')
+
 const timeout = ref(2000)
 const formRef = ref(null)
 

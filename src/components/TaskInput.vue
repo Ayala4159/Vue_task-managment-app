@@ -36,11 +36,12 @@
 import { ref, computed, shallowRef, watch } from 'vue'
 import { useTaskStore } from '@/stores/TaskStore.js'
 
-const taskStore = useTaskStore();
+const taskStore = useTaskStore()
 
 const emit = defineEmits(['category-added', 'task-added']);
 
 const message = shallowRef(false)
+
 const rules = {
     required: value => !!value || 'Field is required',
     uniqueTask: (value) => {

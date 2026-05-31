@@ -3,7 +3,7 @@
         <template v-slot:title>
             <span class="font-weight-black">Task Managment</span>
         </template>
-        
+
         <v-card-text class="bg-surface-light pt-4">
             <TaskInput @task-added="addTask" />
             <TaskFilters />
@@ -24,12 +24,15 @@ const taskStore = useTaskStore();
 function addTask(taskName, taskCategory) {
     taskStore.addTask(taskName, taskCategory)
 }
+
 function deleteTask(task) {
     taskStore.deleteTask(task)
 }
+
 function updateStatus(task) {
     taskStore.updateStatus(task)
 }
+
 </script>
 
 <style lang="scss" scoped></style>

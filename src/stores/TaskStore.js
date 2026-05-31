@@ -6,17 +6,20 @@ const TASK_STATUS = Object.freeze({
     PENDING: 'Pending',
     IN_PROGRESS: 'In progress',
     COMPLETED: 'Completed'
-});
+})
 
-export const useTaskStore = defineStore('counter', () => {
+export const useTaskStore = defineStore('task', () => {
+
     //Data
     const tasks = ref(JSON.parse(localStorage.getItem('data')) || [])
     const categories = computed(() => {
         return [...new Set(tasks.value.map(task => task.category))];
     })
+
     //Filter data
     const categoryFilter = ref('All categories')
     const search = ref('')
+
     const filterTasks = computed(() => {
         let tmp = categoryFilter.value === 'All categories' ?
             tasks.value : tasks.value.filter((t) => t.category === categoryFilter.value)
@@ -24,6 +27,7 @@ export const useTaskStore = defineStore('counter', () => {
             tmp = tmp.filter((t) => t.name.toLowerCase().includes(search.value.toLowerCase()))
         return tmp
     })
+
     //Sort data
     const tasksByCategory = computed(() => {
         return filterTasks.value.reduce((groups, task) => {
@@ -35,6 +39,7 @@ export const useTaskStore = defineStore('counter', () => {
             return groups;
         }, {})
     })
+
     //Function
     function addTask(taskName, taskCategory) {
         const newTask = {
@@ -45,10 +50,12 @@ export const useTaskStore = defineStore('counter', () => {
         tasks.value.push(newTask)
         localStorage.setItem('data', JSON.stringify(tasks.value))
     }
+
     function deleteTask(task){
         tasks.value=tasks.value.filter((t)=>t.name!==task.name||t.category!==task.category)
         localStorage.setItem('data', JSON.stringify(tasks.value))
     }
+
     function updateStatus(task){
         tasks.value=tasks.value.map((t)=>{
             if(t.name===task.name&& t.category===task.category)
@@ -57,6 +64,7 @@ export const useTaskStore = defineStore('counter', () => {
         })
         localStorage.setItem('data', JSON.stringify(tasks.value))
     }
+    
     //Return
     return {
         tasks, categories, categoryFilter, filterTasks, search,tasksByCategory, addTask,deleteTask,updateStatus
